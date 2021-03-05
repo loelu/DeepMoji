@@ -1,9 +1,9 @@
 <template>
-  <router-view/>
+  <div>Hello Connect</div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'Connect'
 }
 </script>
