@@ -1,0 +1,58 @@
+{
+  "name": "deepmoji-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "feather-icons": "^4.28.0",
+    "peerjs": "^1.3.1",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.0-alpha.5",
+    "@vue/cli-plugin-eslint": "^5.0.0-alpha.5",
+    "@vue/cli-service": "^5.0.0-alpha.5",
+    "@vue/compiler-sfc": "^3.0.7",
+    "autoprefixer": "^10.2.4",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "core-js": "^3.6.5",
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^7.5.0",
+    "postcss": "^8.2.7",
+    "tailwindcss": "^2.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "standard"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-console": "off",
+      "no-debugger": "off"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
