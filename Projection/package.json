@@ -1,0 +1,40 @@
+{
+  "name": "projection",
+  "version": "1.0.0",
+  "description": "POC of projecting face landmarks",
+  "main": "index.js",
+  "scripts": {
+    "watch": "cross-env NODE_ENV=development parcel index.html --no-hmr --target browser --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loelu/DeepMoji.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loelu/DeepMoji/issues"
+  },
+  "homepage": "https://github.com/loelu/DeepMoji#readme",
+  "dependencies": {
+    "@tensorflow-models/face-landmarks-detection": "0.0.1",
+    "@tensorflow/tfjs-backend-webgl": "2.4.0",
+    "@tensorflow/tfjs-converter": "2.4.0",
+    "@tensorflow/tfjs-core": "^2.4.0",
+    "plotly.js-dist": "^1.58.4"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
+    "clang-format": "~1.2.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "parcel-bundler": "^1.12.4",
+    "yalc": "~1.0.0-pre.27"
+  }
+}
