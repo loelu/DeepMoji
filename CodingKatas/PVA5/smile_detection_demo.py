@@ -5,7 +5,7 @@ import tensorflow as tf
 
 cap = cv.VideoCapture(0)
 face_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
-model = keras.models.load_model('smilde_detection_model')
+model = keras.models.load_model('smile_detection_model')
 class_names = ['negative_smiles', 'positive_smiles']
 
 if not cap.isOpened():
@@ -22,6 +22,7 @@ while True:
         cv.rectangle(gray, (x, y), (x+w, y+h), (255, 255, 0), 2)
         
         roi_image = gray[y:y+h, x:x+w]
+        # convert gray image to rgb (3 channels) to have the same input dimension for the model
         roi_rbg_from_gray = np.repeat(roi_image[..., np.newaxis], 3, -1)
         roi_image_resized = cv.resize(roi_rbg_from_gray, dsize=(64, 64), interpolation=cv.INTER_CUBIC)
         
