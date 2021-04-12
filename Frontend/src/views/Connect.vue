@@ -1,11 +1,24 @@
 <template>
-  <div class="flex flex-col justify-center items-center w-screen h-screen">
+  <div class="flex flex-col items-center">
     <div class="w-96">
       <u-input hint="Target peer ID" v-model="id"/>
       <u-button class="w-32 mx-auto mb-6" size="sm" :disabled="!id || isConnectionOpen" @click="connectPeer">Connect</u-button>
       <u-input hint="Add data" v-model="text"/>
       <u-button class="w-32 mx-auto" size="sm" :disabled="!text || !isConnectionOpen" @click="sendData">Send</u-button>
     </div>
+    <suspense>
+      <video-capture
+        :width="400"
+        :height="400"
+        :show-video="true"
+        @capture="onCapture"
+      />
+    </suspense>
+    <drawing-area
+      :width="400"
+      :height="400"
+      :face-predictions="predictions"
+    />
   </div>
 </template>
 
@@ -13,19 +26,22 @@
 import { peerJsServerConfig } from '@/config'
 import Peer from 'peerjs'
 
+import DrawingArea from '@/components/DrawingArea'
 import UInput from '@/components/Input'
 import UButton from '@/components/Button'
+import VideoCapture from '@/components/VideoCapture'
 
 export default {
   name: 'Connect',
-  components: { UButton, UInput },
+  components: { VideoCapture, DrawingArea, UButton, UInput },
   data () {
     return {
       peer: null,
       connection: null,
       isConnectionOpen: false,
       id: '',
-      text: ''
+      text: '',
+      predictions: []
     }
   },
   methods: {
@@ -52,6 +68,10 @@ export default {
     },
     sendData () {
       this.connection.send(this.text)
+    },
+    onCapture (facePredictions) {
+      this.predictions = facePredictions
+      this.connection.send(facePredictions)
     }
   },
   mounted () {
