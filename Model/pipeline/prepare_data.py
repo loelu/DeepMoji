@@ -15,7 +15,7 @@ def prepare_data(dataset_size: int = 500):
         x.append(image)
 
         facial_landmarks = np.array(entry["landmarks_68_3d_xy_normalized"], dtype = 'float')
-        facial_landmarks = facial_landmarks
+        facial_landmarks = facial_landmarks * 450
         y.append(facial_landmarks)
 
     flat_list = []

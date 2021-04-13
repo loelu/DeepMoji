@@ -39,4 +39,4 @@ def create_model():
     return model
 
 def fit(model, x, y):
-    model.fit(x, y, batch_size=50, epochs=1, validation_split = 0.2)
+    return model.fit(x, y, batch_size=50, epochs=40, validation_split = 0.2)
