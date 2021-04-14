@@ -6,20 +6,27 @@
     <div>waiting for connection...</div>
     <div>id: {{ peerId }}</div>
   </div>
+  <drawing-area :width="400" height="400" :face-predictions="predictions"/>
 </template>
 
 <script>
 import { peerJsServerConfig } from '@/config'
 import Peer from 'peerjs'
 
+import DrawingArea from '@/components/DrawingArea'
+
 export default {
   name: 'Receive',
+  components: {
+    DrawingArea
+  },
   data () {
     return {
       peer: null,
       peerId: '',
       connection: null,
-      isConnectionOpen: false
+      isConnectionOpen: false,
+      predictions: []
     }
   },
   methods: {
@@ -44,7 +51,9 @@ export default {
       })
     },
     handleData (data) {
-      console.log(data)
+      if (Array.isArray(data)) {
+        this.predictions = data
+      }
     }
   },
   mounted () {
