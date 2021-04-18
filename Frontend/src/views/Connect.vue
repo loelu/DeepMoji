@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center">
-    <div class="w-96">
+  <div class="flex flex-col space-y-8 items-center p-8">
+    <div class="w-96 bg-white">
       <u-input hint="Target peer ID" v-model="id"/>
       <u-button class="w-32 mx-auto mb-6" size="sm" :disabled="!id || isConnectionOpen" @click="connectPeer">Connect</u-button>
       <u-input hint="Add data" v-model="text"/>
