@@ -1,6 +1,7 @@
 <template>
   <div>
     <video
+      class="overflow-hidden rounded-2xl"
       ref="video"
       v-show="showVideo"
       autoplay
@@ -10,8 +11,8 @@
       :height="height"
     />
     <div class="flex justify-center space-x-4 mt-4">
-      <u-button @click="isCapturing = true">Start</u-button>
-      <u-button @click="isCapturing = false">Stop</u-button>
+      <u-button size="sm" @click="isCapturing = true">Start</u-button>
+      <u-button size="sm" @click="isCapturing = false">Stop</u-button>
     </div>
   </div>
 </template>

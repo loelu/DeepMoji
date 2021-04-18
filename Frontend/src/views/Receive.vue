@@ -8,8 +8,8 @@
         <div>waiting for connection...</div>
         <div>id: {{ peerId }}</div>
       </div>
-      <drawing-area :width="400" height="400" :face-predictions="predictions"/>
     </div>
+    <drawing-area :width="400" :height="400" :face-predictions="predictions"/>
   </div>
 </template>
 

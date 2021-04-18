@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4">
+  <div class="bg-white overflow-hidden rounded-2xl">
     <canvas
       ref="canvas"
       :width="width"

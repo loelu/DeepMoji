@@ -1,24 +1,24 @@
 <template>
   <div class="flex flex-col space-y-8 items-center p-8">
-    <div class="w-96 bg-white">
+    <div class="w-96 bg-white rounded-2xl overflow-hidden bg-opacity-90 p-4">
       <u-input hint="Target peer ID" v-model="id"/>
       <u-button class="w-32 mx-auto mb-6" size="sm" :disabled="!id || isConnectionOpen" @click="connectPeer">Connect</u-button>
-      <u-input hint="Add data" v-model="text"/>
-      <u-button class="w-32 mx-auto" size="sm" :disabled="!text || !isConnectionOpen" @click="sendData">Send</u-button>
     </div>
-    <suspense>
-      <video-capture
+    <div class="flex items-start space-x-4">
+      <suspense>
+        <video-capture
+          :width="400"
+          :height="400"
+          :show-video="true"
+          @capture="onCapture"
+        />
+      </suspense>
+      <drawing-area
         :width="400"
         :height="400"
-        :show-video="true"
-        @capture="onCapture"
+        :face-predictions="predictions"
       />
-    </suspense>
-    <drawing-area
-      :width="400"
-      :height="400"
-      :face-predictions="predictions"
-    />
+    </div>
   </div>
 </template>
 
