@@ -18,6 +18,7 @@
         :height="400"
         :face-predictions="predictions"
       />
+      <audio ref="audio" autoplay/>
     </div>
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
     return {
       peer: null,
       connection: null,
+      mediaConnection: null,
       isConnectionOpen: false,
       id: '',
       text: '',
@@ -58,12 +60,21 @@ export default {
       })
       console.log(this.id)
     },
-    connectPeer () {
+    async connectPeer () {
       this.connection = this.peer.connect(this.id, { reliable: true })
-      console.log(this.connection)
+      const localStream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: false
+      })
+      console.log(localStream)
+      this.mediaConnection = this.peer.call(this.id, localStream)
+
       this.connection.on('open', () => {
         console.log('connection open')
         this.isConnectionOpen = true
+      })
+      this.mediaConnection.on('stream', (remoteStream) => {
+        this.$refs.audio.srcObject = remoteStream
       })
     },
     sendData () {

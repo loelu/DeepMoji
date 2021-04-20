@@ -10,6 +10,7 @@
       </div>
     </div>
     <drawing-area :width="400" :height="400" :face-predictions="predictions"/>
+    <audio ref="audio" autoplay/>
   </div>
 </template>
 
@@ -52,6 +53,16 @@ export default {
           })
           this.connection.on('data', this.handleData)
         }
+      })
+      this.peer.on('call', async (mediaConnection) => {
+        const localStream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+          video: false
+        })
+        mediaConnection.answer(localStream)
+        mediaConnection.on('stream', (stream) => {
+          this.$refs.audio.srcObject = stream
+        })
       })
     },
     handleData (data) {
