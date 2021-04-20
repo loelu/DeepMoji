@@ -1,13 +1,17 @@
 <template>
-  <div v-if="isConnectionOpen">
-    <div>Connected</div>
+  <div class="flex flex-col space-y-8 items-center p-8">
+    <div class="w-96">
+      <div v-if="isConnectionOpen">
+        <div>Connected</div>
+      </div>
+      <div v-else>
+        <div>waiting for connection...</div>
+        <div>id: {{ peerId }}</div>
+      </div>
+    </div>
+    <drawing-area :width="400" :height="400" :face-predictions="predictions"/>
+    <audio ref="audio" autoplay/>
   </div>
-  <div v-else>
-    <div>waiting for connection...</div>
-    <div>id: {{ peerId }}</div>
-  </div>
-  <drawing-area :width="400" :height="400" :face-predictions="predictions"/>
-  <audio ref="audio" autoplay/>
 </template>
 
 <script>

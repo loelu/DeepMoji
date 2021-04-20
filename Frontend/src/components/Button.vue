@@ -35,11 +35,11 @@ export default {
 
       switch (this.type) {
         case 'primary':
-          classes.push('bg-green-500', 'text-white', 'border-green-500')
-          !this.disabled && classes.push('hover:bg-green-600', 'hover:bg-opacity-75')
+          classes.push('bg-yellow-500', 'text-white', 'border-yellow-500')
+          !this.disabled && classes.push('hover:bg-yellow-600', 'hover:bg-opacity-75')
           break
         case 'secondary':
-          classes.push('bg-white', 'hover:bg-green-50', 'text-green-500', 'border-green-500')
+          classes.push('bg-white', 'hover:bg-yellow-50', 'text-yellow-500', 'border-yellow-500')
           !this.disabled && classes.push('hover:bg-green-50')
           break
         case 'tertiary':

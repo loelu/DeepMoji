@@ -1,0 +1,32 @@
+name: Deploy to Firebase Hosting on merge
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create local .env file
+        env:
+          PEER_SERVER_HOST: ${{ secrets.VUE_APP_PEER_SERVER_HOST }}
+          PEER_SERVER_PATH: ${{ secrets.VUE_APP_PEER_SERVER_PATH }}
+          PEER_SERVER_PORT: ${{ secrets.VUE_APP_PEER_SERVER_PORT }}
+          PEER_SERVER_KEY: ${{ secrets.VUE_APP_PEER_SERVER_KEY }}
+        run: |
+          printf "%s=%s\n" \
+          {VUE_APP_PEER_SERVER_HOST,$PEER_SERVER_HOST,\
+          VUE_APP_PEER_SERVER_PATH,$PEER_SERVER_PATH,\
+          VUE_APP_PEER_SERVER_PORT,$PEER_SERVER_PORT,\
+          VUE_APP_PEER_SERVER_KEY,$PEER_SERVER_KEY} \
+          > .env.local
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEEPMOJI_B75DC }}'
+          channelId: live
+          projectId: deepmoji-b75dc
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
