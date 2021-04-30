@@ -3,10 +3,8 @@ import tensorflow_datasets as tfds
 import numpy as np
 import pandas as pd
 
-def prepare_data_aflw2k3d(dataset_size: int = 500) -> (np.ndarray, np.ndarray):
-    ds, info = tfds.load('aflw2k3d', split='train', with_info=True)
-    tfds.as_dataframe(ds.take(4), info)
-    assert isinstance(ds, tf.data.Dataset)
+def prepare_data_tfds(dataset_name: str, target_name: str, dataset_size: int = 500) -> (np.ndarray, np.ndarray):
+    ds, info = tfds.load(dataset_name, split='train', with_info=True)
 
     x = []
     y = []
@@ -15,7 +13,7 @@ def prepare_data_aflw2k3d(dataset_size: int = 500) -> (np.ndarray, np.ndarray):
         image = np.array(image, dtype = 'float')
         x.append(image)
 
-        facial_landmarks = np.array(entry["landmarks_68_3d_xy_normalized"], dtype = 'float')
+        facial_landmarks = np.array(entry[target_name], dtype = 'float')
         facial_landmarks = facial_landmarks * 450
         y.append(facial_landmarks)
 
