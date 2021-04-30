@@ -7,15 +7,15 @@
     <div class="flex items-start space-x-4">
       <suspense>
         <video-capture
-          :width="400"
-          :height="400"
+          :width="450"
+          :height="450"
           :show-video="true"
           @capture="onCapture"
         />
       </suspense>
       <drawing-area
-        :width="400"
-        :height="400"
+        :width="450"
+        :height="450"
         :face-predictions="predictions"
       />
       <audio ref="audio" autoplay/>
