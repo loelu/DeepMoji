@@ -1,5 +1,5 @@
 .venv
 data/300w-3d
-data/kaggle_facial_keypoints_detection
+data/
 **/__pycache__/
 **/.ipynb_checkpoints/
