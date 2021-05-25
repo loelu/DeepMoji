@@ -5,3 +5,6 @@
 2. Install requirements from `requirements.txt`
 
 3. checkout the Jupyter Notebook
+
+
+Converting Python Keras model to tensorflowjs format: https://www.tensorflow.org/js/tutorials/conversion/import_keras
