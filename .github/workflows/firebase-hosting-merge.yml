@@ -21,9 +21,13 @@ jobs:
           VUE_APP_PEER_SERVER_PORT,$PEER_SERVER_PORT,\
           VUE_APP_PEER_SERVER_KEY,$PEER_SERVER_KEY} \
           > .env.local
-      - run: cd Frontend/ && npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Build sources
+        working-directory: Frontend
+        run: npm ci && npm run build
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: Frontend
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEEPMOJI_B75DC }}'
           channelId: live
