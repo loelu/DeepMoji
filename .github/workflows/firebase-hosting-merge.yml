@@ -10,10 +10,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create local .env file
         env:
-          PEER_SERVER_HOST: ${{ secrets.VUE_APP_PEER_SERVER_HOST }}
-          PEER_SERVER_PATH: ${{ secrets.VUE_APP_PEER_SERVER_PATH }}
-          PEER_SERVER_PORT: ${{ secrets.VUE_APP_PEER_SERVER_PORT }}
-          PEER_SERVER_KEY: ${{ secrets.VUE_APP_PEER_SERVER_KEY }}
+          PEER_SERVER_HOST: ${{ secrets.PEER_SERVER_HOST }}
+          PEER_SERVER_PATH: ${{ secrets.PEER_SERVER_PATH }}
+          PEER_SERVER_PORT: ${{ secrets.PEER_SERVER_PORT }}
+          PEER_SERVER_KEY: ${{ secrets.PEER_SERVER_KEY }}
         run: |
           printf "%s=%s\n" \
           {VUE_APP_PEER_SERVER_HOST,$PEER_SERVER_HOST,\
