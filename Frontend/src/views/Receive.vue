@@ -9,8 +9,21 @@
         <div>id: {{ peerId }}</div>
       </div>
     </div>
-    <drawing-area :width="400" :height="400" :face-predictions="predictions"/>
-    <audio ref="audio" autoplay/>
+    <div class="flex items-start space-x-4">
+      <suspense>
+        <video-capture
+          :width="400"
+          :height="400"
+          @capture="onCapture"
+        />
+      </suspense>
+      <drawing-area
+        :width="400"
+        :height="400"
+        :face-predictions="remotePredictions"
+      />
+      <audio ref="audio" autoplay/>
+    </div>
   </div>
 </template>
 
@@ -19,11 +32,13 @@ import { peerJsServerConfig } from '@/config'
 import Peer from 'peerjs'
 
 import DrawingArea from '@/components/DrawingArea'
+import VideoCapture from '@/components/VideoCapture'
 
 export default {
   name: 'Receive',
   components: {
-    DrawingArea
+    DrawingArea,
+    VideoCapture
   },
   data () {
     return {
@@ -31,7 +46,8 @@ export default {
       peerId: '',
       connection: null,
       isConnectionOpen: false,
-      predictions: []
+      predictions: [],
+      remotePredictions: []
     }
   },
   methods: {
@@ -67,8 +83,12 @@ export default {
     },
     handleData (data) {
       if (Array.isArray(data)) {
-        this.predictions = data
+        this.remotePredictions = data
       }
+    },
+    onCapture (facePredictions) {
+      this.predictions = facePredictions
+      this.connection.send(facePredictions)
     }
   },
   mounted () {
