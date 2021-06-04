@@ -7,16 +7,15 @@
     <div class="flex items-start space-x-4">
       <suspense>
         <video-capture
-          :width="450"
-          :height="450"
-          :show-video="true"
+          :width="400"
+          :height="400"
           @capture="onCapture"
         />
       </suspense>
       <drawing-area
-        :width="450"
-        :height="450"
-        :face-predictions="predictions"
+        :width="400"
+        :height="400"
+        :face-predictions="remotePredictions"
       />
       <audio ref="audio" autoplay/>
     </div>
@@ -43,7 +42,8 @@ export default {
       isConnectionOpen: false,
       id: '',
       text: '',
-      predictions: []
+      predictions: [],
+      remotePredictions: []
     }
   },
   methods: {
@@ -73,12 +73,20 @@ export default {
         console.log('connection open')
         this.isConnectionOpen = true
       })
+
+      this.connection.on('data', this.handleData)
+
       this.mediaConnection.on('stream', (remoteStream) => {
         this.$refs.audio.srcObject = remoteStream
       })
     },
     sendData () {
       this.connection.send(this.text)
+    },
+    handleData (data) {
+      if (Array.isArray(data)) {
+        this.remotePredictions = data
+      }
     },
     onCapture (facePredictions) {
       this.predictions = facePredictions
