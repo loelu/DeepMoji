@@ -22,6 +22,9 @@ Zuerst haben wir ein CNN aufgebaut mit mehreren Conv2D und MaxPooling Schichten,
 
 Wir haben noch verschiedene Optimizer und Varianten mit dem CNN Model versucht, welche im Jupyter Notebook `experiments.ipynb` zu finden sind. Dazu haben wir mit einem Standard CNN begonnen (Convolution2D, MaxPool2D, Flatten und Dense). Nach und nach haben wir einige Optimierungen eingebaut, wie die BatchNormalization, ein Layer, welcher die Daten normalisiert, was die Trainingszeit verkürzen soll. Danach ein Dropout-Layer, welcher Overfitting verhindern soll, jedoch aber den Loss verschlechterte.
 
+![Diagram: architecture of the CNN](./nn.svg)
+
+Das Model-Diagramm wurde mit folgender Website erstellt: [http://alexlenail.me/NN-SVG/LeNet.html](http://alexlenail.me/NN-SVG/LeNet.html)
 
 #### Transferlearning
 Wir haben einen Versuch mit dem VGG19 und den Imagenet Gewichten als Base Model gestartet. Die Resultate des Transfer Learning Models hat die besten Loss erzielt, dauerte aber länger zum Trainieren. Der Loss nach 50 Epochen war 26, im Vergleich dazu, unsere eigenen CNN Modelle hatten einen Loss zwischen 100 und 400. Deshalb wollten das Transferlearning Model in unserer Website gebrauchen, jedoch konnte die konvertierte TensorflowJS Version nicht ins Javascript importiert werden, sondern warf eine Exception, dass ein Layer nicht verfügbar ist. Bei unseren eigenen CNN Modellen hat es dafür geklappt, deshalb haben wir es mit ihnen ausgetestet.
