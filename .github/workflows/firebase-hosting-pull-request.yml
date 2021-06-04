@@ -6,9 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd Frontend/ && npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Build sources
+        working-directory: Frontend
+        run: npm ci && npm run build
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: Frontend
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEEPMOJI_B75DC }}'
           projectId: deepmoji-b75dc
