@@ -39,6 +39,27 @@ https://www.tensorflow.org/js/tutorials/conversion/import_keras
 
 ### Peer-to-peer connection
 
-### Canvas
+### Projection
+Das face-landmarks-detection Model von Tensorflow generiert aus jedem Gesicht 478 Koordinaten, welche verschiedenen Punkten des Gesichts entsprechen. Das Mapping der Punkte ist auf dem Bild sichtbar.
 
+![Diagram: Mappings](https://raw.githubusercontent.com/tensorflow/tfjs-models/master/face-landmarks-detection/mesh_map.jpg)
 
+Aus diesen Punkten muss nun erneut eine Darstellung des Gesichts erstellt werden. Um den Aufwand im Rahmen der Semesterarbeit zu halten, haben wir uns dazu entschieden, mit HTML Canvas die wichtigsten Teile der Gesichter nachzuzeichnen. Das Zeichnen der Gesichter ist auch für Geräte mit schwacher Rechenlsietung kein Problem.
+
+Das Ergebnis des Models liefert nicht nur die rohen Daten, sondern gruppeirt sie auch in Gesichtspartien. So können z.B. einfach alle Punkte des linken Wangenknochens abgefragt werden, was das Zeichnen sehr vereinfacht. Um die Geischter erkennbar und doch simpel zu halten, haben wir uns für folgende Partien entschieden, welche gezeichnet werden:
+- Silhouette
+- linkes Auge
+- linke Augenbraue
+- rechtes Auge
+- rechte Augenbraue
+- innere Lippe
+- äussere Lippe
+- Nasenumriss
+- Nasenspitze
+
+Das Ergebnis ist in der untenstehenden Abbildung ersichtlich. Damit sind die Gesichter als solche erkennbar und auch Emotionen können übertragen werden.
+
+![Diagram: Gesicht](./face.png)
+
+#### Weitere Möglichkeiten
+Mit anderen Lösungsansätzen, welche jedoch nicht realsiiert wurden, könnte das Gesicht der Person noch besser visualisiert werden, ohne dass das eigentliche Bild übertragen werden muss. So könnte z.B. ein Comic-Charakter erstellt werden, welcher der eigentlichen Person sehr ähnlich sieht. Dieser Charakter könnte dann anhand der Datenpunkte animiert werden. Ein weiterer Ansatz wäre, dass mit einem zweiten Modell anhand eines einzelnen Bilds des Gesichts der Person, die Datenpunkte auf dieses Bild übertragen werden können und so das "tatsächliche Gesicht" animiert wird. Da wir jedoch keine bestehende Lösung dazu gefunden haben, haben wir diese Ansätze für die Semesterarbeit nicht weiterverfolgt.
