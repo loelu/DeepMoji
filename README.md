@@ -37,7 +37,20 @@ https://www.tensorflow.org/js/tutorials/conversion/import_keras
 
 ## Frontend
 
+DeepMoji ist als [Web-Applikation](https://deepmoji-b75dc.web.app/) verfügbar und kann somit auf allen gängigen Plattformen verwendet werden. Die Applikation 
+verwendet Vue.js als Framework.
+
+![Screenshot](./screenshot.png)
+
 ### Peer-to-peer connection
+
+Um die extrahierten Datenpunkte vom Sender zum Empfänger zu übertragen, wird WebRTC verwendet, ein offener Standard für 
+das Web. Dabei wird die [PeerJS](https://peerjs.com/) Library zu Hilfe genommen, um einen Teil der Komplexität zu abstrahieren. 
+Während via einem Data Channel die Datenpunkte übertragen werden, wird ein Media Channel genutzt, um Audiosignale zu mitzusenden.
+
+Via Webcam werden die Gesichtspunkte detektiert und über den Data Channel an einen anderen Peer geschickt. Dort werden die 
+Punkte auf ein Canvas projiziert (siehe weiter unten). Dasselbe passiert auf der Maschine des Peers, es entsteht also eine 
+bidirektionale Verbindung.
 
 ### Projection
 Das face-landmarks-detection Model von Tensorflow generiert aus jedem Gesicht 478 Koordinaten, welche verschiedenen Punkten des Gesichts entsprechen. Das Mapping der Punkte ist auf dem Bild sichtbar.
