@@ -19,7 +19,7 @@
 
 <script>
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { getModel, getWebcam, getFacePredictions } from '@/processing'
+import { getMediaPipeModel, getWebcam, getFacePredictionsMediaPipe } from '@/processing'
 import UButton from '@/components/Button'
 
 export default {
@@ -60,7 +60,7 @@ export default {
     })
 
     console.log('Fetching model...')
-    const model = await getModel()
+    const model = await getMediaPipeModel()
     console.log('Model is fetched')
 
     const emitPredictions = async () => {
@@ -68,7 +68,7 @@ export default {
        * @type {Tensor<Rank.R3>}
        */
       const inputImage = await webcam.value.capture()
-      const facePredictions = await getFacePredictions(model, inputImage)
+      const facePredictions = await getFacePredictionsMediaPipe(model, inputImage)
       inputImage.dispose()
 
       emit('capture', facePredictions)
