@@ -22,7 +22,7 @@ Zuerst haben wir ein CNN aufgebaut mit mehreren Conv2D und MaxPooling Schichten,
 
 Wir haben noch verschiedene Optimizer und Varianten mit dem CNN Model versucht, welche im Jupyter Notebook `experiments.ipynb` zu finden sind. Dazu haben wir mit einem Standard CNN begonnen (Convolution2D, MaxPool2D, Flatten und Dense). Nach und nach haben wir einige Optimierungen eingebaut, wie die BatchNormalization, ein Layer, welcher die Daten normalisiert, was die Trainingszeit verkürzen soll. Danach ein Dropout-Layer, welcher Overfitting verhindern soll, jedoch aber den Loss verschlechterte.
 
-![Diagram: architecture of the CNN](./nn.svg)
+![Diagram: architecture of the CNN](./assets/nn.svg)
 
 Das Model-Diagramm wurde mit folgender Website erstellt: [http://alexlenail.me/NN-SVG/LeNet.html](http://alexlenail.me/NN-SVG/LeNet.html)
 
@@ -40,7 +40,7 @@ https://www.tensorflow.org/js/tutorials/conversion/import_keras
 DeepMoji ist als [Web-Applikation](https://deepmoji-b75dc.web.app/) verfügbar und kann somit auf allen gängigen Plattformen verwendet werden. Die Applikation 
 verwendet Vue.js als Framework.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./assets/screenshot.png)
 
 ### Peer-to-peer connection
 
@@ -72,7 +72,22 @@ Das Ergebnis des Models liefert nicht nur die rohen Daten, sondern gruppeirt sie
 
 Das Ergebnis ist in der untenstehenden Abbildung ersichtlich. Damit sind die Gesichter als solche erkennbar und auch Emotionen können übertragen werden.
 
-![Diagram: Gesicht](./face.png)
+![Diagram: Gesicht](./assets/face.png)
 
 #### Weitere Möglichkeiten
 Mit anderen Lösungsansätzen, welche jedoch nicht realsiiert wurden, könnte das Gesicht der Person noch besser visualisiert werden, ohne dass das eigentliche Bild übertragen werden muss. So könnte z.B. ein Comic-Charakter erstellt werden, welcher der eigentlichen Person sehr ähnlich sieht. Dieser Charakter könnte dann anhand der Datenpunkte animiert werden. Ein weiterer Ansatz wäre, dass mit einem zweiten Modell anhand eines einzelnen Bilds des Gesichts der Person, die Datenpunkte auf dieses Bild übertragen werden können und so das "tatsächliche Gesicht" animiert wird. Da wir jedoch keine bestehende Lösung dazu gefunden haben, haben wir diese Ansätze für die Semesterarbeit nicht weiterverfolgt.
+
+
+### Vergleich Teams / DeepMoji
+Um am Schluss zu sehen, ob DeepMoji nun weniger Daten gebraucht für einen Call haben wir die Anzahl Daten gesendet mit den Chrome Webtools in bit/s gemessen: chrome://webrtc-internals/
+
+Teams Nutzung:
+![Diagram: Teams Nutzung](./assets/teams.png)
+
+
+
+Deepmoji Nutzung:
+![Diagram: DeepMoji Nutzung](./assets/deepmoji.png)
+
+
+Wie man sieht, sendet Deepmoji weniger Daten als Teams mit etwa 500k Bits. Teams sendet aber nur ein wenig mehr mit etwa 750k Bits. Dies führen wir darauf zurück, das Teams wahrscheinlich schon viele Kompressionsmöglichkeiten anwendet, und wir eigentlich noch eher verschwenderisch immer ein ganzes Objekt senden mit mehr Landmark-Punkten als wir brauchen und nicht nur die Punkte, die sich geändert haben. Es ist also schon mal ein guter Anfang, aber es existiert noch einiges an Optimierungspotential.
